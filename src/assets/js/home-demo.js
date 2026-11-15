@@ -129,25 +129,30 @@ const scenes = [
   ...buttons.slice(3).map((button) => [button, () => showLoading(button)]),
 ];
 
-function enableMasonry() {
-  controls.setAttribute('data-masonry', '');
-  const style = getComputedStyle(controls);
-  const row = parseFloat(style.getPropertyValue('--masonry-row'));
-  const gap = parseFloat(style.getPropertyValue('--masonry-gap'));
-  const tiles = [...controls.children];
-
-  function sizeTile(tile) {
-    const span = Math.ceil((tile.getBoundingClientRect().height + gap) / row);
-    tile.style.setProperty('--masonry-span', span);
-  }
-
+function initMasonry() {
+  const desktop = matchMedia('(width > 48rem)');
   const observer = new ResizeObserver((entries) => {
-    for (const { target } of entries) sizeTile(target);
+    const style = getComputedStyle(controls);
+    const row = parseFloat(style.getPropertyValue('--masonry-row'));
+    const gap = parseFloat(style.getPropertyValue('--masonry-gap'));
+
+    for (const { target } of entries) {
+      const span = Math.ceil((target.offsetHeight + gap) / row);
+      target.style.setProperty('--masonry-span', `span ${span}`);
+    }
   });
-  for (const tile of tiles) {
-    sizeTile(tile);
-    observer.observe(tile);
+
+  function syncLayout() {
+    controls.toggleAttribute('data-masonry', desktop.matches);
+    if (desktop.matches) {
+      for (const card of cards) observer.observe(card, { box: 'border-box' });
+    } else {
+      observer.disconnect();
+    }
   }
+
+  desktop.addEventListener('change', syncLayout);
+  syncLayout();
 }
 
 function rearrange() {
@@ -294,5 +299,5 @@ new MutationObserver(syncThemeSwitches).observe(document.documentElement, {
   attributeFilter: ['data-mode'],
 });
 
-if ('ResizeObserver' in window) enableMasonry();
+if ('ResizeObserver' in window) initMasonry();
 syncPlayback();
