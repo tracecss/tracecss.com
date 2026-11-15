@@ -2,7 +2,14 @@ import assert from 'node:assert/strict';
 import { readFile, readdir } from 'node:fs/promises';
 
 const root = new URL('../src/', import.meta.url);
-const locales = ['en', 'ru', 'uk'];
+const locales = ['en', 'ru', 'uk', 'pt', 'de', 'es', 'ar', 'zh-Hans'];
+const scripts = {
+  ru: 'Cyrillic',
+  uk: 'Cyrillic',
+  ar: 'Arabic',
+  'zh-Hans': 'Han',
+};
+const docsLocales = new Set(['ru', 'uk']);
 
 const dictionaries = await Promise.all(
   locales.map(async (locale) => {
@@ -43,13 +50,16 @@ const englishPages = [
 
 for (const locale of locales.slice(1)) {
   const directory = new URL(`${locale}/`, root);
+  const expectedPages = docsLocales.has(locale)
+    ? englishPages.toSorted()
+    : ['404.md', 'index.md'];
   assert.deepEqual(
     await markdownFiles(directory),
-    englishPages.toSorted(),
+    expectedPages,
     `${locale} Markdown pages`,
   );
 
-  for (const path of englishPages) {
+  for (const path of expectedPages) {
     const [english, translated] = await Promise.all([
       readFile(new URL(path, root), 'utf8'),
       readFile(new URL(path, directory), 'utf8'),
@@ -64,9 +74,10 @@ for (const locale of locales.slice(1)) {
         assert.match(translated, /^title: RTL$/m);
         continue;
       }
+      const script = scripts[locale] ?? 'Latin';
       assert.match(
         translated,
-        new RegExp(`^${field}: .+\\p{Script=Cyrillic}`, 'mu'),
+        new RegExp(`^${field}: .*\\p{Script=${script}}`, 'mu'),
         `Missing localized ${field} in ${locale}/${path}`,
       );
     }

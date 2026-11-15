@@ -1,0 +1,172 @@
+---
+layout: base.html
+---
+<div class="home">
+  <svg class="home-art-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <symbol id="home-spark" viewBox="0 0 80 80">
+        <path fill="currentColor" d="M39 2c4-1 3 23 13 30 9 6 27 5 26 10-1 4-20 3-28 11-8 7-8 26-12 25-4 0-3-18-11-27C20 44 1 43 2 39c1-4 19-4 27-12C36 20 35 3 39 2Z"/>
+      </symbol>
+      <symbol id="home-leaf" viewBox="0 0 120 120">
+        <path fill="currentColor" d="M55 111c-4-5-2-18-9-24C35 79 8 86 5 73c-2-9 13-12 26-10C19 54 8 42 15 35c5-6 20 2 31 13-5-17-3-37 7-40 11-4 16 13 15 31 11-16 24-22 31-15 6 6-1 19-11 29 15-7 27-4 27 4 1 10-15 20-33 25-13 4-13 13-14 24-1 8-8 10-13 5Z"/>
+      </symbol>
+      <symbol id="home-sprout" viewBox="0 0 100 110">
+        <path fill="currentColor" d="M46 106c-4-4 0-24-9-31-8-7-22-8-28-20-5-10-2-21 6-22 11-2 21 14 25 25 2-18 1-53 17-54 16-1 12 30 8 48 9-14 20-20 27-12 7 8-3 26-17 35-12 7-15 14-17 25-1 6-7 10-12 6Z"/>
+        <path fill="var(--home-accent)" d="M53 24c-3 7 7 12 10 5 3-8-7-12-10-5ZM23 48c-6 4-1 13 5 10 5-3 1-13-5-10Zm51 6c-4 6 5 12 9 6 4-7-5-12-9-6Z"/>
+      </symbol>
+    </defs>
+  </svg>
+  <section class="home-hero">
+    <div class="home-hero-content">
+      <div class="home-intro">
+        <h1>{{ home.heading }}</h1>
+        <p>{{ home.intro }}</p>
+        <ul class="home-benefits">
+          {% for benefit in home.benefits %}
+          <li><span class="trace-icon" aria-hidden="true">{% icon "check" %}</span>{{ benefit }}</li>
+          {% endfor %}
+        </ul>
+        <a class="home-primary" href="{{ "/docs/" | locale_url(page.lang) }}">{{ home.start }}</a>
+        <div class="home-art" aria-hidden="true">
+          <svg class="home-motif home-hero-spark"><use href="#home-spark"/></svg>
+          <svg class="home-motif home-hero-spark-secondary"><use href="#home-spark"/></svg>
+          <svg class="home-motif home-hero-leaf"><use href="#home-leaf"/></svg>
+        </div>
+      </div>
+
+      <div class="home-playground" id="playground">
+        <div class="home-controls" data-demo-controls>
+          <div class="home-demo-card home-demo-type" data-demo-card>
+            <div class="home-demo-toolbar">
+              <div class="home-demo-icons" aria-hidden="true">
+                {% for icon in ["sparkles", "leaf", "sun"] %}
+                <span class="home-demo-icon"><span class="trace-icon">{% icon icon %}</span></span>
+                {% endfor %}
+              </div>
+              <button type="button" class="trace-secondary trace-outline trace-small trace-icon-only"
+                data-demo-toggle data-play="{{ home.play }}" data-pause="{{ home.pause }}"
+                aria-label="{{ home.pause }}" hidden>
+                <span class="trace-icon home-demo-play" aria-hidden="true">{% icon "play" %}</span>
+                <span class="trace-icon home-demo-pause" aria-hidden="true">{% icon "pause" %}</span>
+              </button>
+            </div>
+            <p><strong>{{ home.typeTitle }}</strong><br /><small>{{ home.typeCaption }}</small></p>
+            <div class="home-demo-themes" data-demo-themes hidden>
+              <label class="home-choice">
+                <input type="checkbox" role="switch" data-demo-theme="light" />
+                {{ home.lightDemo }}
+              </label>
+              <label class="home-choice">
+                <input type="checkbox" role="switch" data-demo-theme="dark" />
+                {{ home.darkDemo }}
+              </label>
+            </div>
+          </div>
+          <div class="home-control-group home-demo-card" data-demo-card>
+            <label class="trace-input-wrap">
+              <span class="trace-icon trace-input-icon-start" aria-hidden="true">{% icon "search" %}</span>
+              <input type="search" class="trace-small" placeholder="{{ home.search }}" aria-label="{{ home.search }}" />
+            </label>
+            <label class="home-choice">
+              <input type="checkbox" class="trace-small" data-demo-check />
+              <span class="trace-icon" aria-hidden="true">{% icon "tag" %}</span>{{ home.checkbox }}
+            </label>
+            <label class="home-choice">
+              <span class="trace-switch">
+                <input type="checkbox" role="switch" data-demo-check />
+                <span class="trace-icon" aria-hidden="true">{% icon "bell" %}</span>
+              </span>
+              {{ home.switch }}
+            </label>
+            <label class="home-choice">
+              <input type="checkbox" role="switch" class="trace-small" data-demo-check checked />
+              {{ home.updates }}
+            </label>
+          </div>
+          <div class="home-control-group home-demo-card" data-demo-card>
+            <label class="trace-input-wrap">
+              <span class="trace-icon trace-input-icon-start" aria-hidden="true">{% icon "mail" %}</span>
+              <input type="email" class="trace-large" placeholder="{{ home.email }}" aria-label="{{ home.email }}" />
+            </label>
+            <button type="button" class="trace-large" data-demo-button aria-busy="false">
+              <span class="trace-icon" aria-hidden="true">{% icon "check" %}</span>{{ home.button }}
+            </button>
+            <button type="button" class="trace-secondary trace-outline trace-small" data-demo-button aria-busy="false">
+              {{ home.reset }}
+            </button>
+          </div>
+          <div class="home-control-group home-demo-card" data-demo-card>
+            <label class="home-choice">
+              <span class="trace-switch">
+                <input type="checkbox" role="switch" class="trace-large" data-demo-check checked />
+                <span class="trace-icon" aria-hidden="true">{% icon "zap" %}</span>
+              </span>
+              {{ home.boost }}
+            </label>
+            <label>{{ home.range }} <input type="range" min="0" max="100" value="35" data-demo-range /></label>
+            <label>{{ home.select }}
+              <select data-demo-select>
+                <option>{{ home.slow }}</option>
+                <option>{{ home.fast }}</option>
+              </select>
+            </label>
+            <a href="{{ "/docs/links/" | locale_url(page.lang) }}">{{ home.demoLink }}</a>
+          </div>
+          <div class="home-control-group home-demo-card" data-demo-card>
+            <fieldset class="home-demo-layout">
+              <legend>{{ home.radio }}</legend>
+              <label class="home-choice"><input type="radio" name="preview-layout" value="grid" checked /> {{ home.grid }}</label>
+              <label class="home-choice"><input type="radio" name="preview-layout" value="list" /> {{ home.list }}</label>
+            </fieldset>
+            <div class="home-demo-actions">
+              <button type="button" class="trace-secondary trace-outline" data-demo-button aria-busy="false">
+                <span class="trace-icon" aria-hidden="true">{% icon "share-2" %}</span>{{ home.share }}
+              </button>
+              <button type="button" class="trace-secondary trace-icon-only" data-demo-button aria-busy="false" aria-label="{{ home.favorite }}">
+                <span class="trace-icon" aria-hidden="true">{% icon "heart" %}</span>
+              </button>
+            </div>
+          </div>
+          <div class="home-control-group home-demo-card" data-demo-card>
+            <label class="home-demo-note">
+              {{ home.note }}
+              <textarea rows="2" data-demo-note placeholder="{{ home.notePlaceholder }}"></textarea>
+            </label>
+            <div class="home-demo-actions">
+              <button type="button" class="trace-danger trace-small" data-demo-button aria-busy="false">
+                <span class="trace-icon" aria-hidden="true">{% icon "trash-2" %}</span>{{ home.remove }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="home-details">
+    <div>
+      <svg class="home-motif home-demo-leaf" aria-hidden="true"><use href="#home-leaf"/></svg>
+      <h2>{{ home.nativeTitle }}</h2>
+      <p>{{ home.nativeText }}</p>
+    </div>
+    <div>
+      <svg class="home-motif home-details-spark" aria-hidden="true"><use href="#home-spark"/></svg>
+      <h2>{{ home.aiTitle }}</h2>
+      <p>{{ home.aiText }}</p>
+      <a href="{{ "/docs/agent-skill/" | locale_url(page.lang) }}">{{ home.skill }} <span aria-hidden="true">↗</span></a>
+    </div>
+  </section>
+
+  <section class="home-install">
+    <div>
+      <svg class="home-motif home-install-sprout" aria-hidden="true"><use href="#home-sprout"/></svg>
+      <h2>{{ home.install }}</h2>
+      <a href="{{ "/docs/version-picker/" | locale_url(page.lang) }}">{{ home.versions }} <span aria-hidden="true">↗</span></a>
+    </div>
+    <div dir="ltr">
+      {% highlight "sh" %}pnpm add trace-css{% endhighlight %}
+      {% highlight "js" %}import 'trace-css';{% endhighlight %}
+    </div>
+  </section>
+</div>
+<script type="module" src="/assets/js/home-demo.js"></script>

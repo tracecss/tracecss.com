@@ -1,6 +1,6 @@
 ---
 title: Loader
-description: Show loading states with Trace CSS.
+description: Show loading indicators on buttons and containers with aria-busy in Trace CSS.
 docSection: Components
 order: 2
 ---

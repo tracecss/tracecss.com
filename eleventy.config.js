@@ -1,5 +1,10 @@
 import { I18nPlugin } from '@11ty/eleventy';
 import i18n from 'eleventy-plugin-i18n';
+import ar from './src/_data/i18n/ar.json' with { type: 'json' };
+import zhHans from './src/_data/i18n/zh-Hans.json' with { type: 'json' };
+import de from './src/_data/i18n/de.json' with { type: 'json' };
+import es from './src/_data/i18n/es.json' with { type: 'json' };
+import pt from './src/_data/i18n/pt.json' with { type: 'json' };
 import en from './src/_data/i18n/en.json' with { type: 'json' };
 import ru from './src/_data/i18n/ru.json' with { type: 'json' };
 import uk from './src/_data/i18n/uk.json' with { type: 'json' };
@@ -9,7 +14,7 @@ import { headingAnchors } from './lib/heading-anchors.js';
 import { icon } from './lib/icon.js';
 
 export default function (eleventyConfig) {
-  const dictionaries = { en, ru, uk };
+  const dictionaries = { en, ar, de, es, pt, ru, uk, 'zh-Hans': zhHans };
   const translations = {};
   for (const [lang, dictionary] of Object.entries(dictionaries)) {
     for (const [key, value] of Object.entries(dictionary)) {
@@ -26,6 +31,11 @@ export default function (eleventyConfig) {
   });
   eleventyConfig.addGlobalData('languageNames', {
     en: 'English',
+    ar: 'العربية',
+    'zh-Hans': '简体中文',
+    de: 'Deutsch',
+    es: 'Español',
+    pt: 'Português',
     ru: 'Русский',
     uk: 'Українська',
   });
@@ -48,6 +58,7 @@ export default function (eleventyConfig) {
     ].sort((left, right) => left.lang.localeCompare(right.lang));
   });
   eleventyConfig.addPlugin(syntaxHighlight);
+  eleventyConfig.addGlobalData('siteUrl', 'https://tracecss.com');
   eleventyConfig.addGlobalData('traceVersion', tracePackage.version);
   eleventyConfig.addShortcode('icon', icon);
   eleventyConfig.amendLibrary('md', (markdown) => {

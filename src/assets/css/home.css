@@ -1,0 +1,433 @@
+.home {
+  --home-ink: light-dark(#073c46, #d6f3eb);
+  --home-accent: light-dark(#07565d, #a6ead4);
+  --home-panel: light-dark(#e8f3ec, #182f31);
+  --home-border: light-dark(#bad1c9, #395652);
+
+  display: grid;
+  gap: clamp(2rem, 6vw, 5rem);
+  padding-block-end: 3rem;
+}
+
+.home h1,
+.home h2 {
+  color: var(--home-ink);
+  letter-spacing: -0.045em;
+}
+
+.home h1 {
+  margin: 0;
+  font-size: clamp(2rem, 3.5vw, 3.25rem);
+  line-height: 0.99;
+  text-wrap: balance;
+}
+
+.home h2 {
+  margin: 0 0 0.7rem;
+  font-size: clamp(1.6rem, 3.5vw, 2.5rem);
+  line-height: 1.1;
+  text-wrap: balance;
+}
+
+.home p {
+  max-inline-size: 52ch;
+  margin-block: 0 1.25rem;
+}
+
+.home-hero {
+  --hero-surface: #e8f3ec;
+  --hero-transition: to right;
+  --hero-demo-surface: light-dark(#f7faf9, #122325);
+
+  padding-block-end: 3rem;
+  background:
+    linear-gradient(to top, var(--trace-bg), transparent 4rem),
+    linear-gradient(
+      var(--hero-transition),
+      var(--hero-surface) 0%,
+      var(--hero-demo-surface) 100%
+    );
+}
+
+.home-hero-content {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  inline-size: min(100%, 88rem);
+  margin-inline: auto;
+}
+
+[data-mode='dark'] .home-hero {
+  --hero-surface: #182f31;
+}
+
+.home-hero:dir(rtl) {
+  --hero-transition: to left;
+}
+
+.home-intro p {
+  margin-block: 1.5rem;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+}
+
+.home-benefits {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0 0 1.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+.home-benefits li {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+}
+
+.home-benefits .trace-icon {
+  color: var(--home-accent);
+}
+
+.home .home-primary {
+  display: inline-block;
+  border-radius: 0.5rem;
+  padding: 0.7rem 1rem;
+  background: var(--home-accent);
+  color: light-dark(#fff, #082f33);
+  font-weight: 750;
+  text-decoration: none;
+}
+
+.home-primary:hover {
+  text-decoration: underline;
+}
+
+.home-install {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: start;
+}
+
+.home-playground {
+  --home-demo-surface: light-dark(#fff, #203638);
+  --home-demo-shadow: light-dark(rgb(16 48 50 / 10%), rgb(0 0 0 / 26%));
+
+  padding-block: clamp(0.65rem, 1.6vw, 1.25rem);
+  color: var(--trace-text);
+  scroll-margin-block-start: calc(var(--site-header-height, 5rem) + 1rem);
+}
+
+.home-controls {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 0.6rem;
+  padding-block: clamp(0.65rem, 2vw, 1rem);
+  padding-inline-end: clamp(0.75rem, 2vw, 1.5rem);
+  border-radius: 1rem;
+}
+
+.home-control-group {
+  display: grid;
+  align-content: space-between;
+  gap: 0.65rem;
+  min-inline-size: 0;
+}
+
+.home-controls fieldset {
+  min-inline-size: 0;
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+
+.home-controls .home-choice {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.home-choice input {
+  flex-shrink: 0;
+}
+
+.home-controls input[type='range'],
+.home-controls select {
+  display: block;
+  inline-size: 100%;
+  margin-block-start: 0.35rem;
+}
+
+.home-details {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.75rem;
+  border-block: 1px solid var(--home-border);
+  padding-block: clamp(1.5rem, 4vw, 3rem);
+}
+
+.home-install pre {
+  margin-block-start: 0;
+}
+
+@media (width <= 48rem) {
+  .home-controls {
+    padding-inline: clamp(0.75rem, 3vw, 1.25rem);
+  }
+
+  .home-controls > .home-demo-card:nth-child(n + 4) {
+    display: none;
+  }
+
+  .home-hero,
+  .home-hero:dir(rtl) {
+    --hero-transition: to bottom;
+  }
+
+  .home-hero-content,
+  .home-details,
+  .home-install {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (width <= 26rem) {
+  .home-controls {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.home-art-library {
+  position: absolute;
+  inline-size: 0;
+  block-size: 0;
+  overflow: hidden;
+}
+
+.home-art {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.home-demo-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.home-demo-toolbar [hidden],
+.home-demo-themes[hidden] {
+  display: none;
+}
+
+.home-demo-themes {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.home-demo-card {
+  border: 1px solid light-dark(#eaf0ee, #30484a);
+  border-radius: 1.15rem;
+  padding: clamp(0.6rem, 1.5vw, 0.95rem);
+  background: var(--home-demo-surface);
+  box-shadow: 0 8px 22px var(--home-demo-shadow);
+  color: var(--trace-text);
+  color-scheme: var(--demo-card-scheme, inherit);
+}
+
+.home-demo-type {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.home-demo-type p {
+  margin: 0;
+}
+
+.home-demo-type strong {
+  font-size: 1.15rem;
+  color: var(--home-ink);
+}
+
+.home-demo-icons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.home-demo-icon {
+  display: grid;
+  place-items: center;
+  min-inline-size: 2.25rem;
+  min-block-size: 2.25rem;
+  border-radius: 50%;
+  background: var(--home-panel);
+  color: var(--home-accent);
+}
+
+.home-demo-icon:nth-child(3n) {
+  color: light-dark(#895900, #efb949);
+}
+
+.home-motif {
+  display: block;
+  inline-size: var(--motif-size);
+  block-size: var(--motif-size);
+  color: var(--motif-color, var(--home-accent));
+  pointer-events: none;
+}
+
+.home-art .home-motif {
+  position: absolute;
+  opacity: 0.2;
+}
+
+.home-hero-spark {
+  --motif-size: clamp(1.4rem, 3vw, 2.4rem);
+  --motif-color: light-dark(#a26c0e, #efb949);
+
+  inset-block-start: 15%;
+  inset-inline-end: 23%;
+  rotate: 12deg;
+}
+
+.home-hero-spark-secondary {
+  --motif-size: clamp(0.85rem, 1.65vw, 1.4rem);
+
+  inset-block-start: 59%;
+  inset-inline-start: 29%;
+  rotate: -12deg;
+}
+
+.home-hero-leaf {
+  --motif-size: clamp(1.85rem, 4vw, 3.15rem);
+
+  inset-block-end: 14%;
+  inset-inline-end: 39%;
+  rotate: -18deg;
+}
+
+.home-demo-leaf {
+  --motif-size: clamp(2.75rem, 7vw, 5.25rem);
+
+  margin-block-end: 0.75rem;
+  rotate: -12deg;
+}
+
+.home-details-spark {
+  --motif-size: 1.5rem;
+  --motif-color: light-dark(#a26c0e, #efb949);
+
+  margin-block-end: 0.55rem;
+}
+
+.home-install-sprout {
+  --motif-size: clamp(2.75rem, 6vw, 4rem);
+  --motif-color: light-dark(#bd890f, #e5ad3a);
+
+  margin-block-end: 0.75rem;
+}
+
+.home-controls .trace-input-wrap,
+.home-controls .trace-input-wrap input {
+  inline-size: 100%;
+  min-inline-size: 0;
+}
+
+.home-demo-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.home-demo-layout .home-choice {
+  margin-block-start: 0.25rem;
+}
+
+.home-demo-card button {
+  max-inline-size: 100%;
+  white-space: normal;
+}
+
+.home-controls[data-masonry] {
+  --masonry-row: 4px;
+  --masonry-gap: 12px;
+
+  grid-auto-flow: row dense;
+  grid-auto-rows: var(--masonry-row);
+  align-items: start;
+  gap: 0 var(--masonry-gap);
+  padding-block-end: max(
+    0px,
+    calc(clamp(0.65rem, 2vw, 1rem) - var(--masonry-gap))
+  );
+}
+
+.home-controls[data-masonry] > .home-demo-card {
+  grid-row-end: span var(--masonry-span);
+}
+
+.home-demo-note {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.home-demo-note textarea {
+  inline-size: 100%;
+  min-inline-size: 0;
+}
+
+.home-controls [data-demo-focus-preview] {
+  outline: 2px solid var(--trace-input-focus, var(--home-accent));
+  outline-offset: 2px;
+}
+
+.home-main {
+  padding-block-end: 2rem;
+}
+
+.home-details,
+.home-install {
+  inline-size: min(calc(100% - 2rem), 70rem);
+  margin-inline: auto;
+}
+
+.home-intro {
+  position: relative;
+  isolation: isolate;
+  align-self: center;
+  padding: clamp(1rem, 4vw, 4rem);
+}
+
+[data-demo-toggle]:not([data-paused]) .home-demo-play,
+[data-demo-toggle][data-paused] .home-demo-pause {
+  display: none;
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .home-demo-card {
+    transition:
+      translate 240ms ease,
+      box-shadow 240ms ease;
+  }
+
+  .home-demo-card:hover {
+    translate: 0 -3px;
+    box-shadow:
+      0 8px 22px var(--home-demo-shadow),
+      0 6px 12px light-dark(rgb(16 48 50 / 5%), rgb(0 0 0 / 10%));
+  }
+}
+
+.home-playground[data-demo-mode='light'] {
+  --demo-card-scheme: light;
+}
+
+.home-playground[data-demo-mode='dark'] {
+  --demo-card-scheme: dark;
+}

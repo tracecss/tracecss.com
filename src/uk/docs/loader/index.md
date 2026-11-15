@@ -1,6 +1,6 @@
 ---
 title: Індикатор завантаження
-description: Показуйте стани завантаження з Trace CSS.
+description: Показуйте індикатори завантаження на кнопках і контейнерах за допомогою атрибута aria-busy в Trace CSS.
 docSection: Components
 order: 2
 ---

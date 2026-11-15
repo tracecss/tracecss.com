@@ -1,6 +1,6 @@
 ---
 title: Radio buttons
-description: Use native radio buttons controls with Trace CSS.
+description: Use native radio buttons with Trace CSS.
 docSection: Forms
 order: 8
 ---
