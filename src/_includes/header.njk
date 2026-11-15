@@ -1,0 +1,72 @@
+{% set homeUrl = '/' | locale_url(page.lang) %} {% set docsUrl = '/docs/' |
+locale_url(page.lang) %}
+<header class="site-header">
+  <div class="site-header-inner">
+    <a
+      class="site-brand"
+      href="{{ homeUrl }}"
+      aria-label="{{ 'homeLabel' | i18n({}, page.lang) }}"
+    >
+      <img src="/assets/trace-logo.svg" width="125" height="40" alt="" />
+    </a>
+
+    <div class="site-header-actions">
+      <nav class="site-nav" aria-label="{{ 'mainNav' | i18n({}, page.lang) }}">
+        <a
+          href="{{ homeUrl }}"
+          aria-current="{{ 'page' if page.url == homeUrl else 'false' }}"
+          >{{ 'home' | i18n({}, page.lang) }}</a
+        >
+        <a
+          href="{{ docsUrl }}"
+          aria-current="{{ 'page' if page.url == docsUrl else 'false' }}"
+          >{{ 'documentation' | i18n({}, page.lang) }}</a
+        >
+        <a href="https://github.com/tracecss/trace">
+          <span class="trace-icon">{% icon "external-link" %}</span>
+          <span>GitHub</span>
+        </a>
+      </nav>
+
+      <div class="site-preferences">
+        <span class="trace-select language-picker" hidden>
+          <select
+            id="language-picker"
+            class="trace-small"
+            aria-label="{{ 'language' | i18n({}, page.lang) }}"
+          >
+            {% for version in versions %}
+            <option value="{{ version.url }}" lang="{{ version.lang }}"{% if version.lang == page.lang %} selected{% endif %}>{{ languageNames[version.lang] }}</option>
+            {% endfor %}
+          </select>
+        </span>
+        <noscript>
+          <nav
+            class="language-links"
+            aria-label="{{ 'language' | i18n({}, page.lang) }}"
+          >
+            {% for version in versions %}
+            <a href="{{ version.url }}" lang="{{ version.lang }}" hreflang="{{ version.lang }}"{% if version.lang == page.lang %} aria-current="page"{% endif %}>{{ languageNames[version.lang] }}</a>
+            {% endfor %}
+          </nav>
+        </noscript>
+        <label class="theme-toggle" hidden>
+          <span class="trace-switch">
+            <input
+              type="checkbox"
+              role="switch"
+              id="theme-toggle"
+              aria-label="{{ 'darkTheme' | i18n({}, page.lang) }}"
+            />
+            <span class="trace-icon theme-icon-light" aria-hidden="true">
+              {% icon "sun" %}
+            </span>
+            <span class="trace-icon theme-icon-dark" aria-hidden="true">
+              {% icon "moon" %}
+            </span>
+          </span>
+        </label>
+      </div>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,35 @@
+body:has(.not-found) {
+  display: flex;
+  flex-direction: column;
+  min-block-size: 100dvh;
+}
+
+.docs:has(> .not-found) {
+  display: grid;
+  flex: 1;
+  place-items: center;
+  inline-size: 100%;
+}
+
+.not-found {
+  display: grid;
+  justify-items: center;
+  gap: 1rem;
+  inline-size: 100%;
+  padding-block: 2rem;
+  text-align: center;
+}
+
+.not-found h1 {
+  margin: 0;
+}
+
+.not-found-illustration {
+  inline-size: min(100%, 22rem);
+  aspect-ratio: 1070 / 842;
+  background: url('../images/404-light.png') center / contain no-repeat;
+}
+
+[data-mode='dark'] .not-found-illustration {
+  background-image: url('../images/404-dark.png');
+}

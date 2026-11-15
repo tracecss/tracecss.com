@@ -1,0 +1,55 @@
+{% set versions = page | languageVersions %}
+<!doctype html>
+<html lang="{{ page.lang }}" data-mode="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ title }} | Trace CSS</title>
+    <meta name="description" content="{{ description }}" />
+    {% for version in versions %}
+    <link
+      rel="alternate"
+      hreflang="{{ version.lang }}"
+      href="{{ version.url }}"
+    />
+    {% if version.lang == "en" %}
+    <link rel="alternate" hreflang="x-default" href="{{ version.url }}" />
+    {% endif %} {% endfor %}
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Trace" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <script>
+      {% include "../assets/js/theme-init.js" %}
+    </script>
+    <link rel="stylesheet" href="/assets/trace/trace.css" />
+    <link rel="stylesheet" href="/assets/fonts/manrope/index.css" />
+    <link rel="stylesheet" href="/assets/css/site.css" />
+  </head>
+  <body>
+    {% include "header.njk" %}
+    <main class="docs">{{ content | safe }}</main>
+    {% include "footer.html" %}
+    <template
+      id="code-copy-template"
+      data-copied="{{ 'copied' | i18n({}, page.lang) }}"
+      data-copy-failed="{{ 'copyFailed' | i18n({}, page.lang) }}"
+    >
+      <button
+        class="code-copy-button trace-secondary trace-outline trace-small"
+        type="button"
+        aria-label="{{ 'copyCode' | i18n({}, page.lang) }}"
+        title="{{ 'copyCode' | i18n({}, page.lang) }}"
+      >
+        <span class="trace-icon">{% icon "clipboard-copy" %}</span>
+      </button>
+      <span class="code-copy-status" role="status"></span>
+    </template>
+    <script src="/assets/js/code-copy.js" defer></script>
+    <script src="/assets/js/language-picker.js" defer></script>
+    <script src="/assets/js/theme.js" defer></script>
+    <script src="/assets/js/sticky-header.js" defer></script>
+  </body>
+</html>

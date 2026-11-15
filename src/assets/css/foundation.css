@@ -1,0 +1,4 @@
+:root {
+  --trace-font-family-sans:
+    'Manrope Variable', system-ui, sans-serif, var(--trace-font-family-emoji);
+}

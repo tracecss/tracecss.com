@@ -1,0 +1,34 @@
+---
+layout: base.html
+---
+<div class="docs-layout">
+  <nav class="docs-sidebar" aria-label="{{ 'articles' | i18n({}, page.lang) }}">
+    {% set sections = [
+      { title: "Getting started", key: "gettingStarted", icon: "book-open" },
+      { title: "Content", key: "content", icon: "type" },
+      { title: "Forms", key: "forms", icon: "form-input" },
+      { title: "Components", key: "components", icon: "layers" }
+    ] %}
+    {% set entries = collections.docs | sort(attribute="data.order") %}
+    {% for section in sections %}
+      <details{% if (docSection or "Getting started") == section.title %} open{% endif %}>
+        <summary>
+          <span class="trace-icon">{% icon section.icon %}</span>
+          {{ section.key | i18n({}, page.lang) }}
+        </summary>
+        <ul>
+          {% for entry in entries %}
+            {% if (entry.data.docSection or "Getting started") == section.title and entry.data.page.lang == page.lang %}
+              <li>
+                <a href="{{ entry.url }}"{% if page.url == entry.url %} aria-current="page"{% endif %}>{{ entry.data.title }}</a>
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </details>
+    {% endfor %}
+  </nav>
+  <article class="docs-article">
+    {{ content | safe }}
+  </article>
+</div>

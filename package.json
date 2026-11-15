@@ -1,0 +1,45 @@
+{
+  "name": "tracecss.com",
+  "version": "1.0.0",
+  "description": "Documentation website for Trace CSS, built with Eleventy.",
+  "scripts": {
+    "dev": "eleventy --serve",
+    "build": "eleventy",
+    "check": "pnpm run check:styles && pnpm run check:format && pnpm run check:editorconfig && pnpm run check:i18n",
+    "check:styles": "stylelint \"src/**/*.css\" --max-warnings 0",
+    "check:format": "prettier --check .",
+    "check:editorconfig": "editorconfig-checker -exclude \"node_modules|_site|pnpm-lock[.]yaml|[.]git/|[.]idea/|[.]husky/_/\"",
+    "format": "prettier --write .",
+    "lint:staged": "lint-staged",
+    "check:commit": "commitlint",
+    "prepare": "node scripts/prepare.mjs",
+    "check:i18n": "node scripts/check-i18n.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.30.1",
+  "dependencies": {
+    "@fontsource-variable/manrope": "^5.3.0",
+    "lucide-static": "^1.70.0",
+    "trace-css": "^0.1.2"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.8",
+    "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.2",
+    "@commitlint/cli": "^21.2.4",
+    "@commitlint/config-conventional": "^21.2.4",
+    "editorconfig-checker": "^7.0.0",
+    "eleventy-plugin-i18n": "^0.1.3",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.6.0",
+    "prettier": "^3.9.10",
+    "stylelint": "^18.0.0",
+    "stylelint-config-standard": "^41.0.0"
+  },
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24.14.0"
+  }
+}

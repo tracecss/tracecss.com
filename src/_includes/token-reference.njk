@@ -1,0 +1,22 @@
+<div class="token-reference">
+  {% for group in cssVariables.groups -%}
+  {% set slug = group.title | slugify %}
+  {% set label = ('token-' ~ slug) | i18n({}, page.lang) %}
+  <h4 id="tokens-{{ slug }}"><a class="heading-anchor" href="#tokens-{{ slug }}" aria-label="{{ 'linkTo' | i18n({ title: label }, page.lang) | escape }}">#</a>{{ label }}</h4>
+  <table aria-labelledby="tokens-{{ slug }}">
+    <thead><tr><th scope="col">{{ variableHeading }}</th><th scope="col">{{ valuesHeading }}</th></tr></thead>
+    <tbody>
+      {% for token in group.entries -%}
+      <tr>
+        <th scope="row"><code>{{ token.name }}</code></th>
+        <td>
+          {% for value in token.values -%}
+          <div><code>{{ value | escape }}</code></div>
+          {% endfor -%}
+        </td>
+      </tr>
+      {% endfor -%}
+    </tbody>
+  </table>
+  {% endfor -%}
+</div>

@@ -1,0 +1,48 @@
+pre:where(:not([data-no-copy]):has(> code)) {
+  padding: 1rem;
+  border-radius: var(--trace-radius-sm);
+  background-color: light-dark(#e0e6eb, #232a31);
+}
+
+pre[class*='language-'] :is(.comment, .prolog, .doctype) {
+  color: light-dark(#52606d, #a9b6c2);
+}
+
+pre[class*='language-'] :is(.keyword, .tag, .boolean) {
+  color: light-dark(#7c287d, #e7a5ec);
+}
+
+pre[class*='language-'] :is(.string, .attr-value) {
+  color: light-dark(#21603c, #91d9ae);
+}
+
+pre[class*='language-'] :is(.function, .attr-name, .number) {
+  color: light-dark(#005473, #87cced);
+}
+
+.code-block {
+  position: relative;
+}
+
+.code-block > pre {
+  padding-inline-end: 4rem;
+}
+
+.code-copy-button {
+  --trace-button-padding-inline: var(--trace-button-padding-block);
+
+  block-size: 2rem;
+  aspect-ratio: 1;
+  position: absolute;
+  inset-block-start: 0.5rem;
+  inset-inline-end: 0.5rem;
+}
+
+.code-copy-status:not(:empty) {
+  position: absolute;
+  inset-block-start: 0.5rem;
+  inset-inline-end: 4rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--trace-radius-sm);
+  background-color: light-dark(var(--trace-bg-light), var(--trace-bg-dark));
+}

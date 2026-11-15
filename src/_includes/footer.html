@@ -1,0 +1,43 @@
+{% set resources = [ { name: "npm", icon: "npm", url:
+"https://www.npmjs.com/package/trace-css" }, { name: "jsDelivr", icon:
+"jsdelivr", url: "https://www.jsdelivr.com/package/npm/trace-css" }, { name:
+"GitHub", icon: "github", url: "https://github.com/tracecss/trace" } ] %}
+<footer class="site-footer">
+  <div class="site-footer-inner">
+    <a
+      class="site-footer-brand"
+      href="{{ '/' | locale_url(page.lang) }}"
+      aria-label="{{ 'homeLabel' | i18n({}, page.lang) }}"
+    >
+      <img src="/favicon.svg" width="32" height="32" alt="" />
+    </a>
+    {% set author %}<a href="https://feleniuk.com/en/about-me/"
+      >{{ 'author' | i18n({}, page.lang) }}</a
+    >{% endset %} {% set license %}<a
+      rel="license"
+      href="https://creativecommons.org/licenses/by/4.0/"
+      >CC BY 4.0</a
+    >{% endset %}
+    <p>{{ 'authorCredit' | i18n({ author: author }, page.lang) | safe }}</p>
+    <p>{{ 'licenseCredit' | i18n({ license: license }, page.lang) | safe }}</p>
+    <nav
+      class="site-footer-links"
+      aria-label="{{ 'projectResources' | i18n({}, page.lang) }}"
+    >
+      {% for resource in resources %}
+      <a
+        href="{{ resource.url }}"
+        aria-label="{{ resource.name }}"
+        title="{{ resource.name }}"
+      >
+        <span
+          class="site-footer-icon"
+          style="--footer-icon: url('/assets/icons/{{ resource.icon }}.svg')"
+          aria-hidden="true"
+        ></span>
+      </a>
+      {% endfor %}
+    </nav>
+    <small>Trace CSS v{{ traceVersion }}</small>
+  </div>
+</footer>
